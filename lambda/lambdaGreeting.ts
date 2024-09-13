@@ -8,6 +8,8 @@ const lorem = new LoremIpsum.LoremIpsum();
 
 export const handler = async (event: any): Promise<any> => {
 
+    console.log(`SNS Topic ARN: ${process.env.SNS_TOPIC_ARN} `);
+
     // Generate random Lorem Ipsum text
     const greetingsMessage = lorem.generateSentences(1);
 
