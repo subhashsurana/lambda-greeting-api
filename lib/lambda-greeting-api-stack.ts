@@ -32,6 +32,7 @@ export class LambdaGreetingApiStack extends cdk.Stack {
       runtime: lambda.Runtime.NODEJS_18_X,
       bundling: {
         minify: true,
+        nodeModules: ['aws-sdk','lorem-ipsum'], 
       },
       environment: {
         SNS_TOPIC_ARN: greetingsTopic.topicArn
@@ -69,12 +70,12 @@ export class LambdaGreetingApiStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'GreetLambdaFunction', {
       value: greetingLambda.functionName,
       description: 'JavaScript Lambda function'
-  });
+    });
 
-  new cdk.CfnOutput(this, 'LambdaGreetApiEndpoint', {
-    value: apigw.url + 'greeting',
-    description: 'The API Gateway endpoint for the /greeting resource',
-  });
+    new cdk.CfnOutput(this, 'LambdaGreetApiEndpoint', {
+      value: apigw.url + 'greeting',
+      description: 'The API Gateway endpoint for the /greeting resource',
+    });
 
 
   }

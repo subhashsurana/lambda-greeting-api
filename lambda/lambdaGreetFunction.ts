@@ -11,24 +11,29 @@ export const handler = async (event: any): Promise<any> => {
     // Generate random Lorem Ipsum text
     const greetingsMessage = lorem.generateSentences(1);
 
+    // Extract visitor's IP address from the API Gateway request context
+    const visitorIp = event.requestContext.identity.sourceIp;
+
+    // Concatenate the greeting and IP into a single string
+    const snsMessage = `Greeting: ${greetingsMessage} || Visitor IP: ${visitorIp}`;
+
     // publish the message to SNS
     const snsParams = {
-        Message: greetingsMessage,
+        Message: snsMessage,
+        
         TopicArn: process.env.SNS_TOPIC_ARN
     };
-
     try {
-        await sns.publish(snsParams).promise();
-        console.log('Message sent to SNS:', greetingsMessage);
+        const result = await sns.publish(snsParams).promise();
     } catch (error) {
         console.error('Error publishing to SNS:', error)
     }
 
-
     return {
         statusCode: 200,
         body: JSON.stringify({
-            message: greetingsMessage
+            message: greetingsMessage,
+            ip: visitorIp
         }),
     };
 };
