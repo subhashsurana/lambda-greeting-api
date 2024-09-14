@@ -20,7 +20,7 @@ The project supports two environments: Staging and Production, and features a bl
 
 ## Architecture
 
-![Architecture Diagram](https://raw.githubusercontent.com/subhashsurana/lambda-greeting-ap/main/images/AWS_Lambda_Greetings_Serverless_API_Blue_Green_Deployment.png)
+![Architecture Diagram](https://raw.githubusercontent.com/subhashsurana/lambda-greeting-api/main/images/AWS_Lambda_Greetings_Serverless_API_Blue_Green_Deployment.png)
 
 -   API Gateway: Provides a /greeting endpoint.
 -   Greeting Lambda: Handles API requests, generates greetings, and sends them to an SNS Topic.
